@@ -108,8 +108,8 @@ In `config/routes.rb`, add the following route(s):
 
 ```ruby
 get "/records" => "records#index", as: 'records'  # add me!
-#get "/records/:id" => "records#show", as: 'record'
 #get "/records/new" => "records#new", as: 'new_record'
+#get "/records/:id" => "records#show", as: 'record'
 #post "/records" => "records#create"
 ```
 
@@ -175,7 +175,7 @@ And then let's also update the view to render a list of records:
   <br>
   <!-- anchor tag that links to a show page -->
   <a href="/records/<%= record.id %>">Show page</a><br> <!-- bad -->
-  <%= link_to "Show page", records_path(record) %>       <!-- good -->
+  <%= link_to "Show page", record_path(record) %>       <!-- good -->
 <% end %>
 ```
 
@@ -334,7 +334,7 @@ post "/records" => "records#create"  # add me!
 
 * You may wonder what all the business is with `.require(:record).permit(...)` is. This is known as [**strong parameters**](http://edgeguides.rubyonrails.org/action_controller_overview.html#strong-parameters) and tells our applications these are the fields we will accept. Its good security practice to help prevent users accidentally updating sensitive model attributes.
 
-* Additionally we can refactor this code to make it look better. We can **encapsulate** our strong parameter logic into a method called `record_params`. Let's make that a private method, since only the controller itself will ever use it. At the bottom of `RecordController` we can write:
+* Additionally we can refactor this code to make it look better. We can **encapsulate** our strong parameter logic into a method called `record_params`. Let's make that a private method, since only the controller itself will ever use it. At the bottom of `RecordsController` we can write:
 
 `app/controllers/records_controller.rb`.
 
